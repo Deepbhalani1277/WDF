@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Smart Campus Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbjnDEy6rOqmdWnVswNOFpRu0F2Ge9x6LnUw&s" alt="DEPSTAR Logo" class="logo-img">
+                <span class="logo-text">Smart Campus</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="login.html" class="active">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+            </ul>
+            <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+        </nav>
+    </header>
+
+    <!-- Login Form Section -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <h2>Welcome Back!</h2>
+                        <p>Sign in to access your campus events and profile</p>
+                    </div>
+
+                    <form class="auth-form" id="loginForm" onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label for="email">Email Address or Student ID</label>
+                            <input type="text" id="email" name="email" placeholder="Enter your email or student ID" required>
+                            <span class="error-message" id="emailError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="password-field">
+                                <input type="password" id="password" name="password" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword()">👁️</button>
+                            </div>
+                            <span class="error-message" id="passwordError"></span>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="remember" name="remember">
+                                Remember me
+                            </label>
+                            <a href="#" class="link" onclick="showForgotPassword()">Forgot Password?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+                    </form>
+
+                    <div class="auth-divider">
+                        <span>or</span>
+                    </div>
+
+                    <div class="auth-alternatives">
+                        <button class="btn btn-secondary btn-full" onclick="loginAsDemo('student')">
+                            Demo Student Login
+                        </button>
+                        <button class="btn btn-outline btn-full" onclick="loginAsDemo('admin')">
+                            Demo Admin Login
+                        </button>
+                    </div>
+
+                    <div class="auth-footer">
+                        <p>Don't have an account? <a href="register.html" class="link">Create Account</a></p>
+                    </div>
+                </div>
+
+                <div class="auth-info">
+                    <h3>Quick Access</h3>
+                    <div class="quick-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">📅</div>
+                            <div class="stat-info">
+                                <span class="stat-number">15</span>
+                                <span class="stat-label">Upcoming Events</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🎯</div>
+                            <div class="stat-info">
+                                <span class="stat-number">8</span>
+                                <span class="stat-label">Your Registrations</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🏆</div>
+                            <div class="stat-info">
+                                <span class="stat-number">3</span>
+                                <span class="stat-label">Certificates Earned</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recent-activity">
+                        <h4>Recent Campus Activity</h4>
+                        <div class="activity-item">
+                            <div class="activity-icon">🎵</div>
+                            <div class="activity-content">
+                                <strong>Annual Music Festival</strong>
+                                <p>Registration closing soon!</p>
+                                <small>2 days remaining</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">💻</div>
+                            <div class="activity-content">
+                                <strong>Tech Innovation Summit</strong>
+                                <p>New workshops added</p>
+                                <small>Updated 1 hour ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Reset Password</h3>
+                <button class="close-modal" onclick="closeForgotPassword()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Enter your email address and we'll send you a link to reset your password.</p>
+                <form id="forgotPasswordForm" onsubmit="handleForgotPassword(event)">
+                    <div class="form-group">
+                        <label for="resetEmail">Email Address</label>
+                        <input type="email" id="resetEmail" name="resetEmail" required>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-outline" onclick="closeForgotPassword()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Send Reset Link</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbjnDEy6rOqmdWnVswNOFpRu0F2Ge9x6LnUw&s" alt="DEPSTAR Logo" class="footer-logo">
+                    <h3>DEPSTAR</h3>
+                    <p>Devang Patel Institute of Advance Technology and Research</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Information</h4>
+                    <p>📍 CHARUSAT Campus, Changa, Gujarat 388421</p>
+                    <p>🌐 CHARUSAT University</p>
+                    <p>📧 info@charusat.ac.in</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="about.html">About DEPSTAR</a></p>
+                    <p><a href="events.html">Campus Events</a></p>
+                    <p><a href="contact.html">Contact Us</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Smart Campus Portal - DEPSTAR, CHARUSAT. All rights reserved.</p>
+                <p>Empowering student success through technology and innovation</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Login form validation and handling
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const email = formData.get('email');
+            const password = formData.get('password');
+            const remember = formData.get('remember');
+            
+            // Clear previous errors
+            clearLoginErrors();
+            
+            // Basic validation
+            if (!email.trim()) {
+                showLoginError('emailError', 'Email or Student ID is required');
+                return;
+            }
+            
+            if (!password.trim()) {
+                showLoginError('passwordError', 'Password is required');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Signing In...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // In real app, verify credentials with backend
+                if (email === 'student@depstar.ac.in' && password === 'password123') {
+                    alert('Login successful! Redirecting to dashboard...');
+                    window.location.href = 'dashboard.html';
+                } else if (email === 'admin@depstar.ac.in' && password === 'admin123') {
+                    alert('Admin login successful! Redirecting to admin dashboard...');
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    showLoginError('passwordError', 'Invalid credentials. Please try again.');
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            }, 1500);
+        }
+        
+        function loginAsDemo(type) {
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            
+            if (type === 'student') {
+                email.value = 'student@depstar.ac.in';
+                password.value = 'password123';
+            } else if (type === 'admin') {
+                email.value = 'admin@depstar.ac.in';
+                password.value = 'admin123';
+            }
+        }
+        
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const toggle = document.querySelector('.password-toggle');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggle.textContent = '🙈';
+            } else {
+                passwordField.type = 'password';
+                toggle.textContent = '👁️';
+            }
+        }
+        
+        function showForgotPassword() {
+            document.getElementById('forgotPasswordModal').style.display = 'flex';
+        }
+        
+        function closeForgotPassword() {
+            document.getElementById('forgotPasswordModal').style.display = 'none';
+        }
+        
+        function handleForgotPassword(event) {
+            event.preventDefault();
+            const email = document.getElementById('resetEmail').value;
+            
+            if (!email) {
+                alert('Please enter your email address');
+                return;
+            }
+            
+            alert(`Password reset link has been sent to ${email}`);
+            closeForgotPassword();
+        }
+        
+        function showLoginError(elementId, message) {
+            document.getElementById(elementId).textContent = message;
+        }
+        
+        function clearLoginErrors() {
+            const errorElements = document.querySelectorAll('.error-message');
+            errorElements.forEach(element => element.textContent = '');
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('forgotPasswordModal');
+            if (event.target === modal) {
+                closeForgotPassword();
+            }
+        }
+    </script>
+</body>
+</html>

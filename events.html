@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Events - Smart Campus Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbjnDEy6rOqmdWnVswNOFpRu0F2Ge9x6LnUw&s" alt="DEPSTAR Logo" class="logo-img">
+                <span class="logo-text">Smart Campus</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="events.html" class="active">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+            </ul>
+            <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Campus Events</h1>
+            <p>Discover exciting events happening around campus</p>
+        </div>
+    </section>
+
+    <!-- Events Filter Section -->
+    <section class="events-filters">
+        <div class="container">
+            <div class="filter-bar">
+                <div class="search-box">
+                    <input type="text" id="searchEvents" placeholder="Search events..." onkeyup="filterEvents()">
+                    <span class="search-icon">🔍</span>
+                </div>
+                
+                <div class="filter-options">
+                    <select id="categoryFilter" onchange="filterEvents()">
+                        <option value="">All Categories</option>
+                        <option value="academic">Academic</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="sports">Sports</option>
+                        <option value="technical">Technical</option>
+                        <option value="social">Social</option>
+                    </select>
+                    
+                    <select id="dateFilter" onchange="filterEvents()">
+                        <option value="">All Dates</option>
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                        <option value="upcoming">Upcoming</option>
+                    </select>
+                    
+                    <select id="sortFilter" onchange="sortEvents()">
+                        <option value="date">Sort by Date</option>
+                        <option value="name">Sort by Name</option>
+                        <option value="popularity">Sort by Popularity</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="filter-tags">
+                <span class="filter-tag active" onclick="filterByTag('all')">All Events</span>
+                <span class="filter-tag" onclick="filterByTag('featured')">Featured</span>
+                <span class="filter-tag" onclick="filterByTag('free')">Free Events</span>
+                <span class="filter-tag" onclick="filterByTag('workshops')">Workshops</span>
+                <span class="filter-tag" onclick="filterByTag('competitions')">Competitions</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Grid Section -->
+    <section class="events-section">
+        <div class="container">
+            <div class="events-grid" id="eventsGrid">
+                <!-- Events will be populated by JavaScript -->
+            </div>
+            
+            <div class="no-events" id="noEvents" style="display: none;">
+                <div class="no-events-content">
+                    <div class="no-events-icon">🔍</div>
+                    <h3>No events found</h3>
+                    <p>Try adjusting your search criteria or browse all events</p>
+                    <button class="btn btn-primary" onclick="clearFilters()">Clear Filters</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Details Modal -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="modalTitle">Event Title</h3>
+                <button class="close-modal" onclick="closeEventModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="event-details-content">
+                    <div class="event-main-info">
+                        <div class="event-image-large" id="modalEventImage">🎵</div>
+                        <div class="event-info">
+                            <div class="event-meta-large">
+                                <div class="meta-item">
+                                    <span class="meta-label">📅 Date:</span>
+                                    <span id="modalDate">Date</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">⏰ Time:</span>
+                                    <span id="modalTime">Time</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">📍 Venue:</span>
+                                    <span id="modalVenue">Venue</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">🎯 Category:</span>
+                                    <span id="modalCategory">Category</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">👥 Capacity:</span>
+                                    <span id="modalCapacity">Capacity</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">💰 Fee:</span>
+                                    <span id="modalFee">Fee</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-description">
+                        <h4>About This Event</h4>
+                        <p id="modalDescription">Event description will appear here...</p>
+                    </div>
+                    
+                    <div class="event-organizer">
+                        <h4>Organized By</h4>
+                        <div class="organizer-info">
+                            <span id="modalOrganizer">Organizer Name</span>
+                            <span id="modalContact">Contact Info</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeEventModal()">Close</button>
+                <button class="btn btn-primary" onclick="registerForEvent()">Register for Event</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbjnDEy6rOqmdWnVswNOFpRu0F2Ge9x6LnUw&s" alt="DEPSTAR Logo" class="footer-logo">
+                    <h3>DEPSTAR</h3>
+                    <p>Devang Patel Institute of Advance Technology and Research</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Information</h4>
+                    <p>📍 CHARUSAT Campus, Changa, Gujarat 388421</p>
+                    <p>🌐 CHARUSAT University</p>
+                    <p>📧 info@charusat.ac.in</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="about.html">About DEPSTAR</a></p>
+                    <p><a href="events.html">Campus Events</a></p>
+                    <p><a href="contact.html">Contact Us</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Smart Campus Portal - DEPSTAR, CHARUSAT. All rights reserved.</p>
+                <p>Empowering student success through technology and innovation</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Sample events data
+        const eventsData = [
+            {
+                id: 1,
+                title: "Annual Music Festival",
+                date: "2025-12-15",
+                time: "6:00 PM",
+                venue: "Main Auditorium",
+                category: "cultural",
+                icon: "🎵",
+                description: "Join us for an incredible night of music featuring local bands and student performers. Experience diverse musical genres from classical to contemporary, with food stalls and interactive activities included!",
+                organizer: "Cultural Committee",
+                contact: "cultural@depstar.ac.in",
+                capacity: "500 seats",
+                fee: "Free",
+                featured: true,
+                tags: ["featured", "free"]
+            },
+            {
+                id: 2,
+                title: "Tech Innovation Summit",
+                date: "2025-12-20",
+                time: "9:00 AM",
+                venue: "Tech Center",
+                category: "technical",
+                icon: "💻",
+                description: "Explore cutting-edge technologies and network with industry professionals. Workshops on AI, blockchain, web development, and emerging tech trends. Perfect for tech enthusiasts and future innovators.",
+                organizer: "Computer Engineering Dept",
+                contact: "ce@depstar.ac.in",
+                capacity: "200 participants",
+                fee: "₹200",
+                featured: true,
+                tags: ["featured", "workshops"]
+            },
+            {
+                id: 3,
+                title: "Sports Championship",
+                date: "2025-01-05",
+                time: "8:00 AM",
+                venue: "Sports Complex",
+                category: "sports",
+                icon: "🏆",
+                description: "Annual inter-department sports competition featuring multiple games including football, basketball, cricket, badminton, and more! Show your department pride and compete for the championship trophy.",
+                organizer: "Sports Committee",
+                contact: "sports@depstar.ac.in",
+                capacity: "Unlimited",
+                fee: "Free",
+                featured: false,
+                tags: ["free", "competitions"]
+            },
+            {
+                id: 4,
+                title: "Career Guidance Workshop",
+                date: "2025-12-18",
+                time: "2:00 PM",
+                venue: "Conference Hall",
+                category: "academic",
+                icon: "📚",
+                description: "Professional development workshop focusing on resume building, interview skills, and career planning. Industry experts will share insights and provide personalized guidance.",
+                organizer: "Placement Cell",
+                contact: "placement@depstar.ac.in",
+                capacity: "100 seats",
+                fee: "Free",
+                featured: false,
+                tags: ["free", "workshops"]
+            },
+            {
+                id: 5,
+                title: "Cultural Dance Competition",
+                date: "2025-12-22",
+                time: "5:00 PM",
+                venue: "Open Air Theatre",
+                category: "cultural",
+                icon: "💃",
+                description: "Showcase your dancing skills in various categories including classical, folk, contemporary, and freestyle. Cash prizes and certificates for winners in each category.",
+                organizer: "Dance Society",
+                contact: "dance@depstar.ac.in",
+                capacity: "300 audience",
+                fee: "₹50 (participants)",
+                featured: false,
+                tags: ["competitions"]
+            },
+            {
+                id: 6,
+                title: "Science Exhibition",
+                date: "2025-12-25",
+                time: "10:00 AM",
+                venue: "Science Block",
+                category: "academic",
+                icon: "🔬",
+                description: "Annual science exhibition featuring innovative projects from all departments. Witness groundbreaking research and creative solutions to real-world problems.",
+                organizer: "Science Club",
+                contact: "science@depstar.ac.in",
+                capacity: "500 visitors",
+                fee: "Free",
+                featured: true,
+                tags: ["featured", "free"]
+            },
+            {
+                id: 7,
+                title: "Photography Workshop",
+                date: "2025-12-28",
+                time: "11:00 AM",
+                venue: "Media Lab",
+                category: "technical",
+                icon: "📸",
+                description: "Learn professional photography techniques from industry experts. Covers basics to advanced techniques including portrait, landscape, and event photography.",
+                organizer: "Photography Club",
+                contact: "photo@depstar.ac.in",
+                capacity: "30 participants",
+                fee: "₹300",
+                featured: false,
+                tags: ["workshops"]
+            },
+            {
+                id: 8,
+                title: "Blood Donation Camp",
+                date: "2025-01-10",
+                time: "9:00 AM",
+                venue: "Medical Center",
+                category: "social",
+                icon: "❤️",
+                description: "Join our noble cause of saving lives through blood donation. Medical team will be present to ensure safe donation process. Refreshments provided to all donors.",
+                organizer: "NSS Unit",
+                contact: "nss@depstar.ac.in",
+                capacity: "200 donors",
+                fee: "Free",
+                featured: false,
+                tags: ["free"]
+            }
+        ];
+
+        let filteredEvents = [...eventsData];
+        let currentTag = 'all';
+
+        // Initialize events display
+        document.addEventListener('DOMContentLoaded', function() {
+            displayEvents(eventsData);
+        });
+
+        // Display events
+        function displayEvents(events) {
+            const eventsGrid = document.getElementById('eventsGrid');
+            const noEvents = document.getElementById('noEvents');
+            
+            if (events.length === 0) {
+                eventsGrid.style.display = 'none';
+                noEvents.style.display = 'block';
+                return;
+            }
+            
+            eventsGrid.style.display = 'grid';
+            noEvents.style.display = 'none';
+            
+            eventsGrid.innerHTML = events.map(event => `
+                <div class="event-card ${event.featured ? 'featured' : ''}" onclick="showEventDetails(${event.id})">
+                    <div class="event-image">${event.icon}</div>
+                    <div class="event-content">
+                        <span class="event-date">${formatDate(event.date)}</span>
+                        ${event.featured ? '<span class="featured-badge">Featured</span>' : ''}
+                        <h3 class="event-title">${event.title}</h3>
+                        <p class="event-description">${event.description.substring(0, 100)}...</p>
+                        <div class="event-meta">
+                            <span>📍 ${event.venue}</span>
+                            <span>⏰ ${event.time}</span>
+                        </div>
+                        <div class="event-footer">
+                            <span class="event-category">${event.category}</span>
+                            <span class="event-fee">${event.fee}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Format date for display
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric' 
+            });
+        }
+
+        // Filter events
+        function filterEvents() {
+            const searchTerm = document.getElementById('searchEvents').value.toLowerCase();
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const dateFilter = document.getElementById('dateFilter').value;
+            
+            filteredEvents = eventsData.filter(event => {
+                const matchesSearch = event.title.toLowerCase().includes(searchTerm) || 
+                                    event.description.toLowerCase().includes(searchTerm);
+                const matchesCategory = !categoryFilter || event.category === categoryFilter;
+                const matchesDate = !dateFilter || checkDateFilter(event.date, dateFilter);
+                const matchesTag = currentTag === 'all' || event.tags.includes(currentTag);
+                
+                return matchesSearch && matchesCategory && matchesDate && matchesTag;
+            });
+            
+            displayEvents(filteredEvents);
+        }
+
+        // Check date filter
+        function checkDateFilter(eventDate, filter) {
+            const today = new Date();
+            const event = new Date(eventDate);
+            
+            switch(filter) {
+                case 'today':
+                    return event.toDateString() === today.toDateString();
+                case 'week':
+                    const weekFromNow = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+                    return event >= today && event <= weekFromNow;
+                case 'month':
+                    const monthFromNow = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+                    return event >= today && event <= monthFromNow;
+                case 'upcoming':
+                    return event >= today;
+                default:
+                    return true;
+            }
+        }
+
+        // Sort events
+        function sortEvents() {
+            const sortBy = document.getElementById('sortFilter').value;
+            
+            filteredEvents.sort((a, b) => {
+                switch(sortBy) {
+                    case 'name':
+                        return a.title.localeCompare(b.title);
+                    case 'popularity':
+                        return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
+                    case 'date':
+                    default:
+                        return new Date(a.date) - new Date(b.date);
+                }
+            });
+            
+            displayEvents(filteredEvents);
+        }
+
+        // Filter by tags
+        function filterByTag(tag) {
+            // Update active tag
+            document.querySelectorAll('.filter-tag').forEach(tagEl => {
+                tagEl.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            currentTag = tag;
+            filterEvents();
+        }
+
+        // Clear all filters
+        function clearFilters() {
+            document.getElementById('searchEvents').value = '';
+            document.getElementById('categoryFilter').value = '';
+            document.getElementById('dateFilter').value = '';
+            document.getElementById('sortFilter').value = 'date';
+            
+            // Reset active tag
+            document.querySelectorAll('.filter-tag').forEach(tagEl => {
+                tagEl.classList.remove('active');
+            });
+            document.querySelector('.filter-tag').classList.add('active');
+            
+            currentTag = 'all';
+            filteredEvents = [...eventsData];
+            displayEvents(filteredEvents);
+        }
+
+        // Show event details modal
+        function showEventDetails(eventId) {
+            const event = eventsData.find(e => e.id === eventId);
+            if (!event) return;
+            
+            document.getElementById('modalTitle').textContent = event.title;
+            document.getElementById('modalEventImage').textContent = event.icon;
+            document.getElementById('modalDate').textContent = formatDate(event.date);
+            document.getElementById('modalTime').textContent = event.time;
+            document.getElementById('modalVenue').textContent = event.venue;
+            document.getElementById('modalCategory').textContent = event.category.charAt(0).toUpperCase() + event.category.slice(1);
+            document.getElementById('modalCapacity').textContent = event.capacity;
+            document.getElementById('modalFee').textContent = event.fee;
+            document.getElementById('modalDescription').textContent = event.description;
+            document.getElementById('modalOrganizer').textContent = event.organizer;
+            document.getElementById('modalContact').textContent = event.contact;
+            
+            document.getElementById('eventModal').style.display = 'flex';
+        }
+
+        // Close event modal
+        function closeEventModal() {
+            document.getElementById('eventModal').style.display = 'none';
+        }
+
+        // Register for event
+        function registerForEvent() {
+            alert('Registration functionality will be implemented with backend integration. Please login to register for events.');
+            closeEventModal();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('eventModal');
+            if (event.target === modal) {
+                closeEventModal();
+            }
+        }
+    </script>

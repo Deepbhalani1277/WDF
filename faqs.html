@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - Smart Campus Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbjnDEy6rOqmdWnVswNOFpRu0F2Ge9x6LnUw&s" alt="DEPSTAR Logo" class="logo-img">
+                <span class="logo-text">Smart Campus</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="faqs.html" class="active">FAQs</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+            </ul>
+            <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about Smart Campus Portal</p>
+        </div>
+    </section>
+
+    <!-- FAQ Search Section -->
+    <section class="faq-search-section">
+        <div class="container">
+            <div class="search-box-large">
+                <input type="text" id="faqSearch" placeholder="Search for answers..." onkeyup="searchFAQs()">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="faq-categories">
+                <button class="category-btn active" onclick="filterFAQs('all')">All Questions</button>
+                <button class="category-btn" onclick="filterFAQs('account')">Account & Registration</button>
+                <button class="category-btn" onclick="filterFAQs('events')">Events</button>
+                <button class="category-btn" onclick="filterFAQs('technical')">Technical Support</button>
+                <button class="category-btn" onclick="filterFAQs('general')">General</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content Section -->
+    <section class="faq-content">
+        <div class="container">
+            <div class="faq-container" id="faqContainer">
+                <!-- Account & Registration FAQs -->
+                <div class="faq-category" data-category="account">
+                    <h2 class="category-title">Account & Registration</h2>
+                    
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <h3>How do I create an account on Smart Campus Portal?</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To create an account:</p>
+                            <ol>
+                                <li>Click on "Register" in the top navigation menu</li>
+                                <li>Fill out the registration form with your details</li>
+                                <li>Make sure to use your official college email address</li>
+                                <li>Choose a strong password following the requirements</li>
+                                <li>Verify your email address through the confirmation link sent to your inbox</li>
+                            </ol>
+                            <p>Once verified, you can log in and access all portal features!</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <h3>What should I do if I forgot my password?</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>If you've forgotten your password:</p>
+                            <ol>
+                                <li>Go to the login page</li>
+                                <li>Click on "Forgot Password?" link</li>
+                                <li>Enter your registered email address</li>
+                                <li>Check your email for a password reset link</li>
+                                <li>Follow the instructions to create a new password</li>
+                            </ol>
+                            <p>If you don't receive the email within 10 minutes, check your spam folder or contact support.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <h3>Can I change my personal information after registration?</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! You can update most of your personal information through your profile page:</p>
+                            <ul>
+                                <li>Name and contact information</li>
+                                <li>Academic details (year, department)</li>
+                                <li>Interests and preferences</li>
+                                <li>Profile picture</li>
+                            </ul>
+                            <p>Some critical information like Student ID may require admin approval to change.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Events FAQs -->
+                <div class="faq-category" data-category="events">
+                    <h2 class="category-title">Events</h2>
+                    
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <h3>How do I register for campus events?</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Registering for events is simple:</p>
+                            <ol>
+                                <li>Browse events on the Events page or dashboard</li>
+                                <li>Click on the event you're interested in</li>
+                                <li>Review event details (date, time, venue, requirements)</li>
+                                <li>Click "Register for Event" button</li>
+                                <li>Confirm your registration</li>
+                                <li>You'll receive a confirmation email with event details</li>
+                            </ol>
+                            <p>Make sure you're logged in to register for events!</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <h3>Can I cancel my event registration?</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, you can cancel your registration:</p>
+                            <ul>
+                                <li>Up to 24 hours before the event starts</li>
+                                <li>Go to your dashboard and find "My Events"</li>
+                                <li>Click "Cancel Registration" next to the event</li>
+                                <li>Confirm your cancellation</li>
+                            </ul>
+                            <p><strong>Note:</strong> For paid events, refund policies may apply. Check event details for specific terms.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <h3>How do I get certificates for attended events?</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Certificates are automatically generated after event completion:</p>
+                            <ol>
+                                <li>Attend the full duration of the event</li>
+                                <li>Mark your attendance through the portal or event coordinator</li>
+                                <li>Certificate will be available in your profile within 48 hours</li>
+                                <li>Download from "My Certificates" section in your dashboard</li>
+                            </ol>
+                            <p>Certificates are digitally signed and can be verified through the portal.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <h3>What if an event gets cancelled?</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>In case of event cancellation:</p>
+                            <ul>
+                                <li>All registered participants will be notified immediately via email and portal notifications</li>
+                                <li>Full refunds will be processed for paid events within 5-7 business days</li>
+                                <li>Event organizers may reschedule and give priority to already registered students</li>
+                                <li>You can view cancellation status on the Events page</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Support FAQs -->
+                <div class="faq-category" data-category="technical">
+                    <h2 class="category-title">Technical Support</h2>
+                    
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                        <div class="faq-question">
+                            <h3>Which browsers are supported?</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Smart Campus Portal works best on modern browsers:</p>
+                            <ul>
+                                <li><strong>Recommended:</strong> Chrome 90+, Firefox 85+, Safari 14+, Edge 90+</li>
+                                <li><strong>Mobile:</strong> Chrome Mobile, Safari Mobile, Samsung Internet</li>
+                                <li><strong>Note:</strong> Internet Explorer is not supported</li>
+                            </ul>
+                            <p>For the best experience, please keep your browser updated to the latest version.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <h3>The portal is loading slowly. What can I do?</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To improve loading speed:</p>
+                            <ol>
+                                <li>Check your internet connection</li>
+                                <li>Clear your browser cache and cookies</li>
+                                <li>Disable browser extensions temporarily</li>
+                                <li>Try using an incognito/private browsing window</li>
+                                <li>Close other browser tabs consuming bandwidth</li>
+                            </ol>
+                            <p>If the issue persists, contact our technical support team.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <h3>I'm not receiving email notifications. How do I fix this?</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To ensure you receive notifications:</p>
+                            <ul>
+                                <li>Check your spam/junk folder</li>
+                                <li>Add noreply@smartcampus.ac.in to your contacts</li>
+                                <li>Verify your email address in profile settings</li>
+                                <li>Check notification preferences in your account settings</li>
+                                <li>Ensure your email provider isn't blocking our domain</li>
+                            </ul>
+                            <p>Contact support if you're still not receiving emails after following these steps.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <h3>Can I use the portal on my mobile device?</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! Smart Campus Portal is fully responsive and mobile-friendly:</p>
+                            <ul>
+                                <li>Access all features on smartphones and tablets</li>
+                                <li>Optimized for touch navigation</li>
+                                <li>Fast loading on mobile networks</li>
+                                <li>Full event registration and management capabilities</li>
+                            </ul>
+                            <p>Simply open your mobile browser and visit the portal URL.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- General FAQs -->
+                <div class="faq-category" data-category="general">
+                    <h2 class="category-title">General</h2>
+                    
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <h3>Who can access Smart Campus Portal?</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>The portal is available to:</p>
+                            <ul>
+                                <li>Currently enrolled students at DEPSTAR</li>
+                                <li>Faculty and staff members</li>
+                                <li>Alumni (with limited access)</li>
+                                <li>Guest users can browse public events but cannot register</li>
+                            </ul>
+                            <p>Registration requires a valid college email address for verification.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <h3>Is my personal data secure?</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We take data security seriously:</p>
+                            <ul>
+                                <li>All data is encrypted during transmission and storage</li>
+                                <li>We follow industry-standard security practices</li>
+                                <li>Personal information is never shared with third parties</li>
+                                <li>You can request data deletion at any time</li>
+                                <li>Regular security audits ensure platform integrity</li>
+                            </ul>
+                            <p>Read our Privacy Policy for detailed information about data handling.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <h3>How do I report a problem or bug?</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To report issues:</p>
+                            <ol>
+                                <li>Use the "Contact Us" page to submit a detailed report</li>
+                                <li>Include screenshots if possible</li>
+                                <li>Describe steps to reproduce the problem</li>
+                                <li>Mention your browser and device information</li>
+                                <li>Our support team will respond within 24 hours</li>
+                            </ol>
+                            <p>For urgent technical issues, call our support hotline: +91-2697-265012</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            <h3>Can I suggest new features for the portal?</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Absolutely! We welcome feedback and suggestions:</p>
+                            <ul>
+                                <li>Submit feature requests through the Contact form</li>
+                                <li>Join our student feedback sessions held monthly</li>
+                                <li>Email your ideas to feedback@smartcampus.ac.in</li>
+                                <li>Popular suggestions are prioritized for development</li>
+                            </ul>
+                            <p>Your input helps us improve the portal for everyone!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Results Message -->
+            <div id="noResults" class="no-results" style="display: none;">
+                <div class="no-results-content">
+                    <div class="no-results-icon">🔍</div>
+                    <h3>No answers found</h3>
+                    <p>We couldn't find any FAQs matching your search. Try different keywords or <a href="contact.html" class="link">contact our support team</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Still Have Questions Section -->
+    <section class="help-section">
+        <div class="container">
+            <div class="help-content">
+                <h2>Still Have Questions?</h2>
+                <p>Can't find the answer you're looking for? Our support team is here to help!</p>
+                
+                <div class="help-options">
+                    <div class="help-card">
+                        <div class="help-icon">💬</div>
+                        <h4>Contact Support</h4>
+                        <p>Get personalized help from our support team</p>
+                        <a href="contact.html" class="btn btn-primary">Contact Us</a>
+                    </div>
+                    
+                    <div class="help-card">
+                        <div class="help-icon">📚</div>
+                        <h4>User Guide</h4>
+                        <p>Detailed documentation and tutorials</p>
+                        <button class="btn btn-outline" onclick="alert('User guide coming soon!')">View Guide</button>
+                    </div>
+                    
+                    <div class="help-card">
+                        <div class="help-icon">🎥</div>
+                        <h4>Video Tutorials</h4>
+                        <p>Watch step-by-step video instructions</p>
+                        <button class="btn btn-outline" onclick="alert('Video tutorials coming soon!')">Watch Videos</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbjnDEy6rOqmdWnVswNOFpRu0F2Ge9x6LnUw&s" alt="DEPSTAR Logo" class="footer-logo">
+                    <h3>DEPSTAR</h3>
+                    <p>Devang Patel Institute of Advance Technology and Research</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Information</h4>
+                    <p>📍 CHARUSAT Campus, Changa, Gujarat 388421</p>
+                    <p>🌐 CHARUSAT University</p>
+                    <p>📧 info@charusat.ac.in</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="about.html">About DEPSTAR</a></p>
+                    <p><a href="events.html">Campus Events</a></p>
+                    <p><a href="contact.html">Contact Us</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Smart Campus Portal - DEPSTAR, CHARUSAT. All rights reserved.</p>
+                <p>Empowering student success through technology and innovation</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // FAQ functionality
+        function toggleFAQ(faqItem) {
+            const answer = faqItem.querySelector('.faq-answer');
+            const toggle = faqItem.querySelector('.faq-toggle');
+            const isOpen = faqItem.classList.contains('active');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-item.active').forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-answer').style.maxHeight = '0';
+                    item.querySelector('.faq-toggle').textContent = '+';
+                }
+            });
+            
+            // Toggle current FAQ
+            if (isOpen) {
+                faqItem.classList.remove('active');
+                answer.style.maxHeight = '0';
+                toggle.textContent = '+';
+            } else {
+                faqItem.classList.add('active');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                toggle.textContent = '-';
+            }
+        }
+        
+        function filterFAQs(category) {
+            const categories = document.querySelectorAll('.faq-category');
+            const buttons = document.querySelectorAll('.category-btn');
+            const noResults = document.getElementById('noResults');
+            
+            // Update button states
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Close all open FAQs
+            document.querySelectorAll('.faq-item.active').forEach(item => {
+                item.classList.remove('active');
+                item.querySelector('.faq-answer').style.maxHeight = '0';
+                item.querySelector('.faq-toggle').textContent = '+';
+            });
+            
+            // Show/hide categories
+            let visibleCount = 0;
+            categories.forEach(cat => {
+                if (category === 'all' || cat.getAttribute('data-category') === category) {
+                    cat.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    cat.style.display = 'none';
+                }
+            });
+            
+            // Show/hide no results message
+            if (visibleCount === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        }
+        
+        function searchFAQs() {
+            const searchTerm = document.getElementById('faqSearch').value.toLowerCase();
+            const faqItems = document.querySelectorAll('.faq-item');
+            const categories = document.querySelectorAll('.faq-category');
+            const noResults = document.getElementById('noResults');
+            let visibleCount = 0;
+            
+            // Close all open FAQs
+            document.querySelectorAll('.faq-item.active').forEach(item => {
+                item.classList.remove('active');
+                item.querySelector('.faq-answer').style.maxHeight = '0';
+                item.querySelector('.faq-toggle').textContent = '+';
+            });
+            
+            if (searchTerm === '') {
+                // Show all if search is empty
+                categories.forEach(cat => cat.style.display = 'block');
+                faqItems.forEach(item => item.style.display = 'block');
+                noResults.style.display = 'none';
+                return;
+            }
+            
+            // First hide all categories
+            categories.forEach(cat => cat.style.display = 'none');
+            
+            // Search through FAQ items
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question h3').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                    item.parentElement.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Show/hide no results message
+            if (visibleCount === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
